@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content ul li {
+    background: #f1f1f1;
+    border-radius: 3px;
+    margin: 8px 0;
+    padding: 10px 0;
+    border: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.container .content ul li .icon {
+   
+    background: #e74c3c;
+   
+}
