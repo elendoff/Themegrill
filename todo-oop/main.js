@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    loadtask();
+
     function loadtask() {
         var action = 'load';
         $.ajax({
@@ -11,8 +11,8 @@ $(document).ready(function () {
             }
         })
     }
+    loadtask();
     // insert record
-
     $('#submit').on('click', function (event) {
         event.preventDefault();
         if ($('#detailtext').val() == '') {
@@ -44,11 +44,11 @@ $(document).ready(function () {
     $(document).on('click', '#remove-btn', function (event) {
         event.preventDefault();
         var id = $(this).data('id');
-        var action = "delete";
+        // var action = "delete";
         $.ajax({
             url: 'action.php',
             method: 'POST',
-            data: { id: id, action: action },
+            data: { id: id },
             success: function (data) {
                 if (data == "deleted") {
                     toastr.success("Task has been deleted sucessfully");
