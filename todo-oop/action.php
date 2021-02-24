@@ -1,22 +1,38 @@
 <?php
-include 'DB.php';
-$obj = new DB();
-
-
-// show data
-
-if (isset($_POST['action'])) {
-
-    if ($_POST['action'] == 'delete') {
-        $id = $_POST['id'];
-        $sql = "DELETE FROM todo_list WHERE id='$id'";
-        $obj->delete($sql);
-        echo "deleted";
+class operation
+{
+    private $DB;
+    private $detail = '';
+    private $action = '';
+    public function __construct($post)
+    {
+        include 'DB.php';
+        $this->DB = new DB();
+        if (isset($post['detail'])) {
+            $this->detail = ($post['detail']);
+        } elseif (isset($post['action']) == 'load') {
+            $this->show_task();
+        } else {
+            $this->delete = $post['id'];
+            $this->delete_task();
+        }
+        if (!empty($this->detail)) {
+            $this->add_task();
+        }
     }
-    if ($_POST['action'] == 'load') {
+    public function add_task()
+    {
+        $detail = $this->detail;
+        $sql = "INSERT INTO todo_list (detail) VALUES ('$detail')";
+        $this->DB->insert($sql);
+        echo "inserted";
+    }
+
+    public function show_task()
+    {
         $output = '';
         $sql = "SELECT * FROM `todo_list` ORDER BY id DESC";
-        $data = $obj->get_data($sql);
+        $data = $this->DB->get_data($sql);
         $output .= '<tr>
         <th>Task</th>
          <th>Action</th>
@@ -29,13 +45,14 @@ if (isset($_POST['action'])) {
         }
         echo $output;
     }
-}
-// add items
-if (isset($_POST['detail'])) {
-    if (!empty($_POST['detail'])) {
-        $detail = $_POST['detail'];
-        $sql = "INSERT INTO todo_list (detail) VALUES ('$detail')";
-        $obj->insert($sql);
-        echo "inserted";
+
+    public function delete_task()
+    {
+        $id = $this->delete;
+        $sql = "DELETE FROM todo_list WHERE id='$id'";
+        $this->DB->delete($sql);
+        echo "deleted";
     }
 }
+
+$obj = new operation($_REQUEST);
