@@ -8,6 +8,14 @@
  * Author URI: https://deepench.com
  * Text Domain: hello-Deependra
 */
+function when_my_plugin_activate()
+{
+    if (get_option('plugin_status') != 'active') {
+        echo '<div class="notice-success notice is-dismissible"><p>Hello World</p></div>';
+        update_option('plugin_status', 'active');
+    }
+}
+add_action('admin_notices', 'when_my_plugin_activate');
 
 function addMenu()
 {
