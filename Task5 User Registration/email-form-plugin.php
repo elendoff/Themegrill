@@ -20,7 +20,6 @@ class EmailFormPlugin
     public function init()
     {
         add_shortcode('email_form', array($this, 'email_form_plugin'));
-        // add_action('admin_init', array($this, 'email_form_submit'));
     }
 
     public function email_form_plugin()
@@ -29,11 +28,6 @@ class EmailFormPlugin
         include('ef-email-form.php');
         return ob_get_clean();
     }
-    // public function email_form_submit()
-    // {
-    //     if (isset($_POST['submit_button'])) {
-    //     ;
-    //     }
-    // }
+  
 }
 $emailformPlugin = new EmailFormPlugin();
