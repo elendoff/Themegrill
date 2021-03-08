@@ -36,7 +36,7 @@ if ( !class_exists( 'EmailFormPlugin' ) ) :
          */
         public function init()
         {
-            add_shortcode( 'email_form', array( $this, 'ur_email_form_plugin' ) );
+            add_shortcode( 'email_form', array( $this, 'efp_email_form_plugin' ) );
             add_action( 'init', array( $this, 'my_script_enqueuer' ) );
             add_action( "wp_ajax_my_user_form", array( $this, 'efp_load_my_user_form' ) );
             add_filter( 'sucess_message_update', array( $this,'email_success_message_update'  ));  
@@ -45,7 +45,7 @@ if ( !class_exists( 'EmailFormPlugin' ) ) :
         /**
          * including a shortcode form
          */
-        public function ur_email_form_plugin()
+        public function efp_email_form_plugin()
         {
             ob_start();
             include( 'ef-email-form.php' );
